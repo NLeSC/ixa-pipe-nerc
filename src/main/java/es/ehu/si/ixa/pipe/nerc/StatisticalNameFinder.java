@@ -215,7 +215,8 @@ public class StatisticalNameFinder implements NameFinder {
         if (model.equalsIgnoreCase("baseline")) {
           trainedModelInputStream = getBaselineModelStream(lang, model);
         } else {
-          trainedModelInputStream = new FileInputStream(model);
+//          trainedModelInputStream = new FileInputStream(model);
+          trainedModelInputStream = StatisticalNameFinder.class.getResourceAsStream(model);
         }
         nercModel = new TokenNameFinderModel(trainedModelInputStream);
       }
