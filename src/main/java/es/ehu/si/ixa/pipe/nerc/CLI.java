@@ -93,8 +93,10 @@ public class CLI {
    */
   public static void main(final String[] args) throws IOException, JDOMException {
 
+    System.err.println("Timestamp EHU-nerc start in-command: " + System.currentTimeMillis());
     CLI cmdLine = new CLI();
     cmdLine.parseCLI(args);
+    System.err.println("Timestamp EHU-nerc end in-command: " + System.currentTimeMillis());
   }
 
   /**
@@ -162,7 +164,9 @@ public class CLI {
       annotator.annotateNEsToKAF(kaf);
     } else {
       Annotate annotator = new Annotate(lang, model, features, beamsize);
+      System.err.println("Timestamp EHU-nerc start work: " + System.currentTimeMillis());
       annotator.annotateNEsToKAF(kaf);
+      System.err.println("Timestamp EHU-nerc end work: " + System.currentTimeMillis());
     }
     bwriter.write(kaf.toString());
     bwriter.close();
