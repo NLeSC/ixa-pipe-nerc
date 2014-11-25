@@ -106,7 +106,7 @@ public class CLI {
    *          the arguments passed through the CLI
    * @throws IOException exception if problems with the incoming data
    */
-  public final void parseCLI(final String[] args) throws IOException {
+  public final void parseCLI(final String[] args) throws IOException, JDOMException {
     try {
       parsedArguments = argParser.parseArgs(args);
       System.err.println("CLI options: " + parsedArguments);
@@ -133,7 +133,7 @@ public class CLI {
    * @throws IOException exception if problems in input or output streams
    */
   public final void annotate(final InputStream inputStream, final OutputStream outputStream)
-      throws IOException {
+      throws IOException, JDOMException {
 
     int beamsize = parsedArguments.getInt("beamsize");
     String features = parsedArguments.getString("features");
@@ -159,8 +159,10 @@ public class CLI {
     }
     kaf.addLinguisticProcessor("entities", "ixa-pipe-nerc-" + lang, "1.0");
     if (parsedArguments.get("gazetteers") != null) {
+      System.err.println("Timestamp EHU-nerc start setup: " + System.currentTimeMillis());
       Annotate annotator = new Annotate(lang, gazetteer, model, features,
           beamsize);
+      System.err.println("Timestamp EHU-nerc end setup: " + System.currentTimeMillis());
       annotator.annotateNEsToKAF(kaf);
     } else {
       Annotate annotator = new Annotate(lang, model, features, beamsize);
