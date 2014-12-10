@@ -159,13 +159,13 @@ public class CLI {
     }
     kaf.addLinguisticProcessor("entities", "ixa-pipe-nerc-" + lang, "1.0");
     if (parsedArguments.get("gazetteers") != null) {
-      System.err.println("Timestamp EHU-nerc start setup: " + System.currentTimeMillis());
       Annotate annotator = new Annotate(lang, gazetteer, model, features,
           beamsize);
-      System.err.println("Timestamp EHU-nerc end setup: " + System.currentTimeMillis());
       annotator.annotateNEsToKAF(kaf);
     } else {
+      System.err.println("Timestamp EHU-nerc start setup: " + System.currentTimeMillis());
       Annotate annotator = new Annotate(lang, model, features, beamsize);
+      System.err.println("Timestamp EHU-nerc end setup: " + System.currentTimeMillis());
       System.err.println("Timestamp EHU-nerc start work: " + System.currentTimeMillis());
       annotator.annotateNEsToKAF(kaf);
       System.err.println("Timestamp EHU-nerc end work: " + System.currentTimeMillis());
